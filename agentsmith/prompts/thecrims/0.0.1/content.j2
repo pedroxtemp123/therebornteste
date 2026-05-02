@@ -1,0 +1,28 @@
+# Handoff de Automação: The Crims Bot (Hunting Grounds)
+
+**Objetivo:** Criar um bot que faz login, entra em salas de Hunting Grounds e ataca jogadores automaticamente com variação de cliques.
+
+## 1. Credenciais e Acesso
+- **URL de Login:** `https://www.thecrims.com/`
+- **Login:** `nemoxRETURNED`
+- **Senha:** `LYwWCNa91E90`
+- **URL Alvo:** `https://www.thecrims.com/assaults-hunting-grounds`
+
+## 2. Estrutura Técnica Mapeada
+- **Página de Salas:** Contém uma grid com botões "ENTRAR" (classe: `p-button p-component p-button-primary w-full mt-auto`).
+- **Estrutura da Sala (Modal):**
+  - A sala abre em um modal/overlay com a classe `.front-well`.
+  - **Slots de Jogadores:** Existem 4 slots principais. Quando um jogador entra, aparece um elemento com a classe `.visitor_information`.
+  - **Botões de Ação:**
+    - `[ESCOLHA...]`: Botão inicial que aparece quando um player entra.
+    - `[PORRADA SOLO]` / `[ATACAR]`: Botões que aparecem após clicar em Escolha.
+  - **Sair da Sala:** Botão com ID dinâmico começando com `exit-button-`.
+
+## 3. Lógica de Automação Necessária
+1. **Login:** Automatizar o preenchimento e clique no botão de login.
+2. **Navegação:** Ir direto para `/assaults-hunting-grounds`.
+3. **Loop de Monitoramento:**
+   - Entrar em uma sala disponível.
+   - Monitorar a presença de `.visitor_information` ou botões com texto `[ESCOLHA...]`.
+   - **Ação de Clique:** Ao detectar o botão, realizar o clique com variação de pixels (ex: `x + random(-5, 5)`, `y + random(-5, 5)`).
+   - **Ataque:** Após o primeiro clique, selecionar a opção de ataque imediatamente.
